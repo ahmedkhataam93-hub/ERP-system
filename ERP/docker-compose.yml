@@ -1,0 +1,19 @@
+# UNTESTED: written without Docker available. Verify with `docker compose config` first.
+services:
+  db:
+    image: postgres:16
+    env_file: .env
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      retries: 10
+  backup:
+    image: postgres:16
+    env_file: .env
+    depends_on: [db]
+    volumes: [./backups:/backups]
+    entrypoint: ["/bin/sh","-c","while true; do PGPASSWORD=$$POSTGRES_PASSWORD pg_dump -h db -U $$POSTGRES_USER $$POSTGRES_DB | gzip > /backups/smarttrade_$$(date +%F).sql.gz; sleep 86400; done"]
+volumes:
+  pgdata:
+# backend and frontend services are added in Phase 2 when their Dockerfiles exist.

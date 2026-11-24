@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>SmartTrade ERP — Enterprise Financial & Resource System</title>
+  <meta name="description" content="Professional Enterprise Resource Planning (ERP) with Double-Entry Accounting, WAC Inventory, and Bilingual Support">
+  
+  <!-- Modern Stylesheets -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/print.css">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232563eb'/><text x='50' y='68' font-size='55' font-weight='bold' text-anchor='middle' fill='white'>ST</text></svg>">
+</head>
+<body>
+  <div id="app-root">
+    <!-- Collapsible Sidebar -->
+    <aside class="app-sidebar" id="app-sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-brand-icon">ST</div>
+        <div class="sidebar-brand-text">
+          <h1>SmartTrade</h1>
+          <small>Enterprise ERP 2.0</small>
+        </div>
+      </div>
+      <nav class="sidebar-nav" id="sidebar-nav"></nav>
+      <div class="sidebar-footer" id="sidebar-user-footer"></div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <div class="app-main">
+      <header class="app-header">
+        <div class="header-search">
+          <span class="header-search-icon">🔍</span>
+          <input type="text" id="global-search-input" placeholder="Search products, invoices, partners... (Ctrl+K)" oninput="SmartTradeApp.setSearch(this.value)">
+        </div>
+
+        <div class="header-actions">
+          <select id="header-role-select" class="header-role-select" onchange="SmartTradeStore.setRole(this.value)" title="Switch User Role">
+            <option value="admin">Administrator (Full Access)</option>
+            <option value="manager">General Manager</option>
+            <option value="accountant">Financial Accountant</option>
+            <option value="sales">Sales Representative</option>
+            <option value="warehouse">Warehouse Specialist</option>
+          </select>
+
+          <button id="header-lang-btn" class="header-btn" onclick="SmartTradeI18n.setLanguage(SmartTradeI18n.getLanguage() === 'en' ? 'ar' : 'en')" title="Switch Language / تبديل اللغة">
+            العربية
+          </button>
+
+          <button class="header-btn" onclick="SmartTradeStore.toggleTheme()" title="Toggle Dark/Light Mode">
+            🌓
+          </button>
+        </div>
+      </header>
+
+      <main class="page-container" id="page-content">
+        <!-- Rendered dynamically by SmartTradeApp -->
+      </main>
+    </div>
+  </div>
+
+  <!-- JavaScript Modules -->
+  <script src="js/engine.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/export.js"></script>
+  <script src="js/reports.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
